@@ -1,0 +1,53 @@
+[2026-03-01T09:03:16.006+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: retail_sales_pipeline.generate_and_load scheduled__2026-02-28T00:00:00+00:00 [queued]>
+[2026-03-01T09:03:16.046+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: retail_sales_pipeline.generate_and_load scheduled__2026-02-28T00:00:00+00:00 [queued]>
+[2026-03-01T09:03:16.048+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-01T09:03:16.086+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): generate_and_load> on 2026-02-28 00:00:00+00:00
+[2026-03-01T09:03:16.104+0000] {standard_task_runner.py:60} INFO - Started process 1958 to run task
+[2026-03-01T09:03:16.112+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'retail_sales_pipeline', 'generate_and_load', 'scheduled__2026-02-28T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/retail_sales_dag.py', '--cfg-path', '/tmp/tmp7paj66tw']
+[2026-03-01T09:03:16.119+0000] {standard_task_runner.py:88} INFO - Job 2: Subtask generate_and_load
+[2026-03-01T09:03:16.369+0000] {task_command.py:423} INFO - Running <TaskInstance: retail_sales_pipeline.generate_and_load scheduled__2026-02-28T00:00:00+00:00 [running]> on host df16e36cbf62
+[2026-03-01T09:03:16.764+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='rithesh' AIRFLOW_CTX_DAG_ID='retail_sales_pipeline' AIRFLOW_CTX_TASK_ID='generate_and_load' AIRFLOW_CTX_EXECUTION_DATE='2026-02-28T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-28T00:00:00+00:00'
+[2026-03-01T09:03:16.770+0000] {logging_mixin.py:188} INFO - Starting data generation and load...
+[2026-03-01T09:03:16.915+0000] {logging_mixin.py:188} INFO - Data saved to /opt/***/data/sales_data.csv
+[2026-03-01T09:03:16.916+0000] {logging_mixin.py:188} INFO - Total records generated: 1000
+[2026-03-01T09:03:16.918+0000] {logging_mixin.py:188} INFO - Columns: ['order_id', 'customer_id', 'product_id', 'product_name', 'category', 'quantity', 'unit_price', 'total_amount', 'order_date', 'city', 'country', 'payment_method', 'status']
+[2026-03-01T09:03:16.920+0000] {logging_mixin.py:188} INFO - 
+Sample of first 3 records:
+[2026-03-01T09:03:17.052+0000] {logging_mixin.py:188} INFO -    order_id customer_id product_id  ... country    payment_method     status
+0  ORD00001    CUST0448     PRD012  ...   India               UPI  Completed
+1  ORD00002    CUST0209     PRD010  ...   India       Credit Card  Completed
+2  ORD00003    CUST0438     PRD017  ...   India  Cash on Delivery  Completed
+
+[3 rows x 13 columns]
+[2026-03-01T09:03:17.055+0000] {logging_mixin.py:188} INFO - 
+Connecting to Snowflake...
+[2026-03-01T09:03:17.059+0000] {connection.py:370} INFO - Snowflake Connector for Python Version: 3.6.0, Python Version: 3.8.18, Platform: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.34
+[2026-03-01T09:03:17.070+0000] {connection.py:1171} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2026-03-01T09:03:20.099+0000] {cursor.py:1028} INFO - query: [USE WAREHOUSE retail_wh]
+[2026-03-01T09:03:20.218+0000] {cursor.py:1041} INFO - query execution done
+[2026-03-01T09:03:20.221+0000] {cursor.py:1205} INFO - Number of results in first chunk: 1
+[2026-03-01T09:03:20.223+0000] {cursor.py:1028} INFO - query: [USE DATABASE retail_db]
+[2026-03-01T09:03:20.467+0000] {cursor.py:1041} INFO - query execution done
+[2026-03-01T09:03:20.469+0000] {cursor.py:1205} INFO - Number of results in first chunk: 1
+[2026-03-01T09:03:20.471+0000] {cursor.py:1028} INFO - query: [USE SCHEMA raw]
+[2026-03-01T09:03:20.555+0000] {cursor.py:1041} INFO - query execution done
+[2026-03-01T09:03:20.557+0000] {cursor.py:1205} INFO - Number of results in first chunk: 1
+[2026-03-01T09:03:20.559+0000] {logging_mixin.py:188} INFO - Connected. Loading data into Snowflake...
+[2026-03-01T09:03:21.098+0000] {cursor.py:1028} INFO - query: [INSERT INTO retail_db.raw.sales ( order_id, customer_id, product_id, product_nam...]
+[2026-03-01T09:03:24.309+0000] {cursor.py:1041} INFO - query execution done
+[2026-03-01T09:03:24.319+0000] {cursor.py:1028} INFO - query: [COMMIT]
+[2026-03-01T09:03:24.402+0000] {cursor.py:1041} INFO - query execution done
+[2026-03-01T09:03:24.405+0000] {cursor.py:1205} INFO - Number of results in first chunk: 1
+[2026-03-01T09:03:24.408+0000] {logging_mixin.py:188} INFO - Successfully loaded 1000 records into retail_db.raw.sales
+[2026-03-01T09:03:24.411+0000] {cursor.py:1028} INFO - query: [SELECT COUNT(*) FROM retail_db.raw.sales]
+[2026-03-01T09:03:24.533+0000] {cursor.py:1041} INFO - query execution done
+[2026-03-01T09:03:24.536+0000] {cursor.py:1205} INFO - Number of results in first chunk: 1
+[2026-03-01T09:03:24.546+0000] {logging_mixin.py:188} INFO - Total records now in Snowflake table: 2000
+[2026-03-01T09:03:24.549+0000] {connection.py:718} INFO - closed
+[2026-03-01T09:03:24.609+0000] {connection.py:724} INFO - No async queries seem to be running, deleting session
+[2026-03-01T09:03:24.692+0000] {logging_mixin.py:188} INFO - Connection closed.
+[2026-03-01T09:03:24.699+0000] {logging_mixin.py:188} INFO - Data generation and load complete.
+[2026-03-01T09:03:24.702+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-01T09:03:24.770+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=retail_sales_pipeline, task_id=generate_and_load, execution_date=20260228T000000, start_date=20260301T090316, end_date=20260301T090324
+[2026-03-01T09:03:24.923+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-01T09:03:24.983+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

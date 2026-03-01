@@ -1,0 +1,29 @@
+[2026-03-01T09:03:38.016+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: retail_sales_pipeline.verify scheduled__2026-02-28T00:00:00+00:00 [queued]>
+[2026-03-01T09:03:38.039+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: retail_sales_pipeline.verify scheduled__2026-02-28T00:00:00+00:00 [queued]>
+[2026-03-01T09:03:38.041+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-01T09:03:38.088+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): verify> on 2026-02-28 00:00:00+00:00
+[2026-03-01T09:03:38.107+0000] {standard_task_runner.py:60} INFO - Started process 1964 to run task
+[2026-03-01T09:03:38.123+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'retail_sales_pipeline', 'verify', 'scheduled__2026-02-28T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/retail_sales_dag.py', '--cfg-path', '/tmp/tmpqhaz1j6o']
+[2026-03-01T09:03:38.137+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask verify
+[2026-03-01T09:03:38.382+0000] {task_command.py:423} INFO - Running <TaskInstance: retail_sales_pipeline.verify scheduled__2026-02-28T00:00:00+00:00 [running]> on host df16e36cbf62
+[2026-03-01T09:03:38.894+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='rithesh' AIRFLOW_CTX_DAG_ID='retail_sales_pipeline' AIRFLOW_CTX_TASK_ID='verify' AIRFLOW_CTX_EXECUTION_DATE='2026-02-28T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-28T00:00:00+00:00'
+[2026-03-01T09:03:38.911+0000] {connection.py:370} INFO - Snowflake Connector for Python Version: 3.6.0, Python Version: 3.8.18, Platform: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.34
+[2026-03-01T09:03:38.918+0000] {connection.py:1171} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2026-03-01T09:03:40.505+0000] {cursor.py:1028} INFO - query: [USE WAREHOUSE retail_wh]
+[2026-03-01T09:03:40.591+0000] {cursor.py:1041} INFO - query execution done
+[2026-03-01T09:03:40.593+0000] {cursor.py:1205} INFO - Number of results in first chunk: 1
+[2026-03-01T09:03:40.597+0000] {cursor.py:1028} INFO - query: [SELECT COUNT(*) FROM retail_db.raw.sales]
+[2026-03-01T09:03:40.698+0000] {cursor.py:1041} INFO - query execution done
+[2026-03-01T09:03:40.700+0000] {cursor.py:1205} INFO - Number of results in first chunk: 1
+[2026-03-01T09:03:40.702+0000] {logging_mixin.py:188} INFO - Raw table count: 2000
+[2026-03-01T09:03:40.704+0000] {cursor.py:1028} INFO - query: [SELECT COUNT(*) FROM retail_db.transformed.sales_summary]
+[2026-03-01T09:03:40.804+0000] {cursor.py:1041} INFO - query execution done
+[2026-03-01T09:03:40.808+0000] {cursor.py:1205} INFO - Number of results in first chunk: 1
+[2026-03-01T09:03:40.812+0000] {logging_mixin.py:188} INFO - Transformed table count: 1161
+[2026-03-01T09:03:40.815+0000] {connection.py:718} INFO - closed
+[2026-03-01T09:03:40.890+0000] {connection.py:724} INFO - No async queries seem to be running, deleting session
+[2026-03-01T09:03:40.968+0000] {logging_mixin.py:188} INFO - Verification complete. Pipeline ran successfully.
+[2026-03-01T09:03:40.973+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-01T09:03:41.025+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=retail_sales_pipeline, task_id=verify, execution_date=20260228T000000, start_date=20260301T090338, end_date=20260301T090341
+[2026-03-01T09:03:41.134+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-01T09:03:41.237+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
